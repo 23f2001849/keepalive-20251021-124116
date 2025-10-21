@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Keep-Alive Ping</title>
+    <style>
+        /* Responsive design applied */
+        @media only screen and (max-width: 600px) {
+            body {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Automated Keep-Alive Ping</h1>
+    <button id="ping-btn">Ping Server</button>
+    <p id="ping-result"></p>
+    <script>
+        document.getElementById('ping-btn').addEventListener('click', function() {
+            fetch('ping_server_url') // Replace 'ping_server_url' with your server URL.
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(json => {
+                document.getElementById('ping-result').textContent = 'Ping successful.';
+            })
+            .catch(error => {
+                document.getElementById('ping-result').textContent = 'Ping failed: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>
